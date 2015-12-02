@@ -9,8 +9,8 @@
     <meta name="description" content="薛建东(luckyxue、二月十六)的博客. 主要分享关于C#、PHP、js、jQuery、linux、sql server、mysql的相关技术,和生活记录，以及小说文章。http://www.luckyxue.com/。" />
     <link rel="canonical" href="http://www.luckyxue.com/" />
 	<link rel="shortcut icon" type="image/x-icon" href="/Images/ico.png" />
-	<link href="/Css/style.css" rel="stylesheet" type="text/css" />
-	<script src="/Js/Ueditor/ueditor.parse.js"></script>
+	<link href="Css/style.css" rel="stylesheet" type="text/css" />
+	<script src="Js/Ueditor/ueditor.parse.js"></script>
 	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"
 		type="text/javascript" charset="utf-8"></script>
 	<script>
