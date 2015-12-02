@@ -1,0 +1,87 @@
+<div class="c_title"><a href="/Technology/20150913140450.html">jQuery插件开发</a></div><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">jQuery这个js库，现在在开发中用到的比较多，用起来比较方便，而且兼容性也比较好，平时自己写的特定的js功能方法多了，就想做一下总结整理，作为积累，以后可以直接用。在jq上做扩展，开发插件是一个不错的选择，如果写的够好甚至可以发布，供他人使用，今天记录一下jQuery插件的开发过程和方法，如果有不对的地方，希望指教。</span></p><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">jQuery插件开发一般是两种模式，一种是类级别的，一种是对象级别的。类级别的就是直接对jQuery添加新的方法，例如$.ajax()。而对象级别的则是针对页面中的某个对象进行的操作，例如$(&#39;#id&#39;).show()。下面我们就这两种开发模式分别进行记录。</span></p><p style="text-indent: 2em; line-height: 2em;"><strong><span style="font-size: 14px;">类级别。</span></strong><span style="font-size: 14px;">一般来说这种开发的还是比较少，也比较简单，有几种方式来进行开发。我们可以直接添加一个全局方法。</span></p><pre class="brush:js;toolbar:false">jQuery.func&nbsp;=&nbsp;function()&nbsp;{&nbsp;&nbsp;&nbsp;
+alert(&#39;www.luckyxue.com&#39;);&nbsp;&nbsp;
+};&nbsp;&nbsp;&nbsp;
+
+$.func();//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;"></span><span style="font-size: 14px;">我们也可以用$.extend()来添加的函数</span>。</p><pre class="brush:js;toolbar:false">$.extend({
+&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;function(name)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;www.luckyxue.com&#39;);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+});
+
+$.func();//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">这种可以达到效果，如果想避免自己写的方法和原有的方法有冲突，还可以加上命名空间。</span></p><pre class="brush:js;toolbar:false">jQuery.MyPlugin&nbsp;=&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;function(name)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(&#39;www.luckyxue.com&#39;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+};
+
+$.MyPlugin.func();//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">这样加上命名空间就可以避免冲突了，也是一种比较安全的操作。但是我们用jQuery开发，大多数是对对象的操作，所以这种方法用的还是比较少，我们下面来说第二种开发方式。</span></p><p style="text-indent: 2em; line-height: 2em;"><strong><span style="font-size: 14px;">对象级别。</span></strong><span style="font-size: 14px;">这种在现实的开发中用到的比较多，这种支持链式调用，链式调用是类似这种形式的调用。</span></p><pre class="brush:js;toolbar:false">$(&quot;#Test&quot;).addClass(&#39;style&#39;).show();</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">这种可以避免对一个对象进行多次操作时频繁调用的问题。对象插件开发还可以接收参数，大大增加了插件的通用灵活性。还能把插件抽象成一个对象</span><span style="font-size: 14px;">，还有许多特性，我们都会一一讲到，下面我们先来看一个简单的例子。</span></p><pre class="brush:js;toolbar:false">$.fn.MyPlugin&nbsp;=&nbsp;function()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;this.css(&#39;color&#39;,&nbsp;&#39;red&#39;);
+};
+
+$(&#39;#tid&#39;).MyPlugin();&nbsp;//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">$.fn的后边加上方法名称，$.fn代表的时选择的元素，方法中的this就是选中的元素，我们可以用jq方法对this元素进行各种各样的操作。$(&#39;#tid&#39;).MyPlugin();这样的调用，就相当于把id为tid的元素里边的css样式设置成了&#39;color:red&#39;，这样一个样式。如果想让插件支持链式调用，只需要在方法中加上return，把this返回去就可以了。</span></p><pre class="brush:js;toolbar:false">$.fn.MyPlugin&nbsp;=&nbsp;function()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.css(&#39;color&#39;,&nbsp;&#39;red&#39;);
+};</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">接收参数。为了使插件更加强大，一定用到参数，还是先看代码。</span></p><pre class="brush:js;toolbar:false">$.fn.MyPlugin&nbsp;=&nbsp;function(options)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;defaults&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;&#39;green&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;&#39;20px&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;};
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;settings&nbsp;=&nbsp;$.extend({},defaults,&nbsp;options);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.css({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;settings.color,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;settings.fontSize
+&nbsp;&nbsp;&nbsp;&nbsp;});
+};
+
+$(&#39;#tid&#39;).MyPlugin({color:&#39;red&#39;,fontSize:&#39;40px&#39;});&nbsp;//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;">其中options是参数，defaults时默认参数。因为jq的extend合并方法，会把所有参数都合并到第一参数上，所以我们$.extend({},defaults, options);这里设置了一个空对象，来存储合并过后的参数，防止默认值被合并修改。为了插件代码更加美观清晰，更容易维护，我们可以把插件写成对象形式，给它属性和方法。</span></p><pre class="brush:js;toolbar:false">var&nbsp;Jsobj&nbsp;=&nbsp;function&nbsp;(ele,&nbsp;options)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;this.$fn&nbsp;=&nbsp;ele;
+&nbsp;&nbsp;&nbsp;&nbsp;this.defaults&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;&#39;green&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;&#39;20px&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;this.options&nbsp;=&nbsp;$.extend({},&nbsp;this.defaults,&nbsp;options)
+}
+
+Jsobj.prototype&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;function&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.$fn.css({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;this.options.color,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;this.options.fontSize
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+
+$.fn.myPlugin&nbsp;=&nbsp;function&nbsp;(options)&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;jsobj&nbsp;=&nbsp;new&nbsp;Jsobj(this,&nbsp;options);
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;jsobj.func();
+}
+
+$(&#39;#tid&#39;).myPlugin({&nbsp;color:&nbsp;&#39;red&#39;,&nbsp;fontSize:&nbsp;&#39;40px&#39;&nbsp;});&nbsp;&nbsp;//调用方法</pre><p style="text-indent: 2em; line-height: 2em;"><span style="font-size: 14px;"></span><span style="font-size: 14px;">我们首先定义对象的属性，然后定义方法，最后在插件中调用应用对象，这样我们维护起来就简单多了，不管事添加新的属性还是方法都是比较方便的。然而这种对象级别的插件开发也存在命名冲突的问题，所以还是需要命名空间，现在有前辈总结了一个这样的结构模板。</span><br/></p><pre class="brush:js;toolbar:false">;&nbsp;(function&nbsp;($,&nbsp;window,&nbsp;document,&nbsp;undefined)&nbsp;{
+
+})(jQuery,&nbsp;window,&nbsp;document);</pre><p style="line-height: 2em; text-indent: 2em;"><span style="font-size: 14px;"></span><span style="font-size: 14px;">我们来一一解读这个格式，首先是分号，这个分号是为了防止前边的js方法没写分号，或者引用的js文件里的方法最后没写分号，而导致这个方法错误使用不了。</span><span style="font-size: 14px;">匿名函数(function(){})();由于Javascript执行表达式是从圆括号里面到外面，所以可以用圆括号强制执行声明的函数，避免函数体内和外部的变量冲</span><span style="font-size: 14px;">突。( </span><span style="font-size: 14px;">$, window, document,undefined)是形参，(jQuery, window,document)是实参，实参为什么没有undefined呢？这个有点意思，因为实参没有传入值，那么undefined形参就是js里的undefined，因为没有定义。</span><span style="font-size: 14px;">window, document实参分别接受window, document对象，window, document对象都是全局环境下的，而在函数体内的window, document其实是局部变量，不是全局的window, document对象。这样做有个好处就是可以提高性能，减少作用域链的查询时间，如果你在函数体内需要多次调用window 或 document对象，这样把window 或 document对象当作参数传进去，这样做是非常有必要的。当然如果你的插件用不到这两个对象，那么就不用传递这两个参数了。好了格式就是这么个格式，那么让我们看看我们开发的插件最后的效果吧。</span></p><pre class="brush:js;toolbar:false">;&nbsp;(function&nbsp;($,&nbsp;window,&nbsp;document,&nbsp;undefined)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;Jsobj&nbsp;=&nbsp;function&nbsp;(ele,&nbsp;options)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.$fn&nbsp;=&nbsp;ele;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.defaults&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;&#39;red&#39;,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;&#39;12px&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.options&nbsp;=&nbsp;$.extend({},&nbsp;this.defaults,&nbsp;options)
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;Jsobj.prototype&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;function&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.$fn.css({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;color&#39;:&nbsp;this.options.color,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;fontSize&#39;:&nbsp;this.options.fontSize
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;$.fn.myPlugin&nbsp;=&nbsp;function&nbsp;(options)&nbsp;{
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;jsobj&nbsp;=&nbsp;new&nbsp;Jsobj(this,&nbsp;options);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;jsobj.func();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+})(jQuery,&nbsp;window,&nbsp;document);
+
+$(&#39;#tid&#39;).myPlugin({&nbsp;color:&nbsp;&#39;red&#39;,&nbsp;fontSize:&nbsp;&#39;40px&#39;&nbsp;});&nbsp;&nbsp;//调用方法</pre><p style="line-height: 2em; text-indent: 2em;"><span style="font-size: 14px;">OK基本上就是这样了。</span><br/></p><p style="line-height: 2em; text-indent: 2em;"><br/></p>

@@ -1,0 +1,53 @@
+@charset "utf-8";
+body{padding:0px; margin:0px auto;-webkit-text-size-adjust:none;color:#3d3d3d;background-color: #888888;}
+ul, li,form, fieldset, legend, button, input, textarea, th, td,img,h2{margin:0 auto; padding:0;}
+body,button, input, select, textarea {font: 12px/1.5 '宋体',tahoma, Srial, helvetica, sans-serif; }
+ul, ol { list-style: none; }
+table{padding:0px; margin:0px auto;text-align:center;}
+img{border:none;}
+a { text-decoration: none; color:#4c4c4c;}
+a:hover {text-decoration: none; color:#e43a3d;}
+.clear{ clear:both;}
+
+
+.main{ width:1080px;background-color:White;margin:0 auto; position:relative;}
+.j_main{ background-color:White;margin:50px auto;padding:30px;}
+.head{ height:170px; }
+.a_head{ height:100px; }
+.rehead{ height:80px; }
+.site-title{text-align: left;height:29px;}
+.site-description{ font-size:1em; float:left}
+.j_title{float:left}
+.j_conml{float:right; padding:50px 0 0 0;}
+.j_conml a{ font-size:15px;vertical-align:middle}
+.content{height:auto;overflow:hidden;}
+.j_list{width:68%;float:left;min-height:400px; height:auto!important; ;word-break : break-all; }
+.j_list li{padding-left: 20px;line-height: 48px;height: 48px;text-align:left;font-size:18px; }
+.j_left{width:30%; height:200px; float:left; padding-left:20px; }
+.j_cont{font-size:13px; background-color:#E8E8E8; height:140px;text-indent: 2em; text-align:left; padding:10px;margin-top:20px;}
+.j_page{ float:left;font-size:15px;height:60px;width:100%;}
+.j_page a{ margin:5px;color:Blue;text-decoration:underline;}
+.j_pageon{text-decoration:none;}
+.j_footer{  padding-top:10px;}
+.j_wb{ background-color:#E8E8E8;height:74px;}
+.j_wbimg{background-color:white;float:left; height:62px ;width:61px;margin: 6px;}
+.j_guan{float:right; width:212px;margin-top: 18px;margin-right: 16px;}
+
+.required{color:Red;}
+.comment-form-author{width:525px; height:70px;float:left;}
+.reinput{ float:left;width:290px; height:42px;vertical-align:middle}
+.j_nav{float:left;width:50px; height:42px;font-size:15px;text-align:left;}
+
+
+.b_colum{ padding-top: 110px; }
+.b_ul{float: left;list-style: outside none none;border-bottom: 1px solid #EDEDED;border-top: 1px solid #EDEDED;width:100%;}
+.b_ul li{float:left;display: inline-block;margin-right: 50px;height:45px;line-height: 45px;}
+
+.c_title{width:100%;font-size:2em; text-align: left;vertical-align:middle;line-height: 80px; }
+.c_title a{color:#0078B6 !important;}
+.b_class{width:200px;}
+
+.c_footer{margin-top: 50px;}
+.c_footer a{color:#0078B6 }
+
+
