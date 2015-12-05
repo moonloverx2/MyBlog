@@ -40,6 +40,11 @@
                 }
 				?>
 				
+				<?php 
+				//评论
+				$BlogId = $_GET["BlogId"];
+				echo  $BlogId;
+				?>
             
 				
 				</div>
