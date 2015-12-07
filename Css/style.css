@@ -23,7 +23,9 @@ a:hover {text-decoration: none; color:#e43a3d;}
 .content{height:auto;overflow:hidden;}
 .j_list{width:68%;float:left;min-height:400px; height:auto!important; ;word-break : break-all; }
 .j_list li{padding-left: 20px;line-height: 48px;height: 48px;text-align:left;font-size:18px; }
-.j_left{width:30%; height:200px; float:left; padding-left:20px; }
+.j_left{width:30%; float:right; padding-left:20px; }
+.j_commentlist{width:68%; float:left; height:200px;padding-top: 120px; }
+.j_comment{ }
 .j_cont{font-size:13px; background-color:#E8E8E8; height:140px;text-indent: 2em; text-align:left; padding:10px;margin-top:20px;}
 .j_page{ float:left;font-size:15px;height:60px;width:100%;}
 .j_page a{ margin:5px;color:Blue;text-decoration:underline;}

@@ -44,12 +44,31 @@
 				//评论
 				$BlogId = $_GET["BlogId"];
 				echo  $BlogId;
-				?>
-            
+				?>            
 				
 				</div>
+				
             <?php require 'Tempalate/Left.html';?>
-				<div class="clear"></div>
+
+<div class="j_commentlist"><span style="font-size: 20px; color: blue">Comments:</span>
+<hr align="center" />
+<ol  style="list-style-type: none;">
+
+	<li class="j_comment" >
+	
+	<span >ExplorePress | 2015-12-07 20:30</span>
+
+	<p>追求永无止境的效率！</p>
+	</li>
+		<li class="alt" id="comment-201859">ExplorePress | 2015-12-07 20:30
+
+	<p>追求永无止境的效率！</p>
+	</li>
+</ol>
+</div>
+
+
+<div class="clear"></div>
 				<br />
 				<hr align="center" />
              <?php include 'Tempalate/Footer.html';?>
