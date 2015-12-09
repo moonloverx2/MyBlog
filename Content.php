@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 	<title>首页_LuckyXue</title>
 	<meta name="keywords" content="">
-	<link rel="shortcut icon" type="image/x-icon" href="/Images/ico.png" />
-	<link href="/Css/style.css" rel="stylesheet" type="text/css" />
-	<script src="/Js/Ueditor/ueditor.parse.js"></script>
-	<script src="/Js/jquery.1.7.2.js"></script>	
-	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"
-		type="text/javascript" charset="utf-8"></script>
-	<script>
+		<link rel="shortcut icon" type="image/x-icon" href="/Images/ico.png" />
+		<link href="/Css/style.css" rel="stylesheet" type="text/css" />
+		<script src="/Js/Ueditor/ueditor.parse.js"></script>
+		<script src="/Js/jquery.1.7.2.js"></script>
+		<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"
+			type="text/javascript" charset="utf-8"></script>
+		<script>
 
 	uParse('#b_content', {
 	    rootPath: '/Js/Ueditor/'
@@ -29,7 +29,7 @@
 			<?php require 'Tempalate/Head.html';?>
 			
 			<div class="content">
-				<div class="j_list"  id="b_content">
+				<div class="j_list" id="b_content">
 
            <?php 
 // 				$HtmlPath = $_GET["Clo"]."/".$_GET["y"]."/".$_GET["m"]."/".$_GET["d"]."/".$_GET["f"];
@@ -50,25 +50,31 @@
 				
             <?php require 'Tempalate/Left.html';?>
 
-<div class="j_commentlist"><span style="font-size: 20px; color: blue">Comments:</span>
-<hr align="center" />
-<ol  style="list-style-type: none;">
+<div class="j_commentlist">
+					<span style="font-size: 20px; color: blue">Comments:</span>
+					<hr align="center" />
+					<ol style="list-style-type: none;">
 
-	<li class="j_comment" >
-	
-	<span >ExplorePress | 2015-12-07 20:30</span>
+						<li class="j_comment"><span class="j_comname"><a
+								style="color: blue;">ExplorePress</a>
+								&nbsp;|&nbsp;&nbsp;2015-12-07 20:30</span>
+							<p >追求永无止境的效率！</p></li>
+							
+						<li class="j_comment"><span class="j_comname"><a
+								style="color: blue;">ExplorePress</a>
+								&nbsp;|&nbsp;&nbsp;2015-12-07 20:30</span>
+							<p >追求永无止境的效率！</p></li>
+					</ol>
+					
+					<div class="c_input">
+					Name:<input type="text" name="ComName" id="ComName"/></br>
+					Email:<input type="text" name="ComEmail" id="ComEmail"/></br>
+					Comment:<textarea name="BComment" id="BComment"></textarea>
+					</div>
+				</div>
 
-	<p>追求永无止境的效率！</p>
-	</li>
-		<li class="alt" id="comment-201859">ExplorePress | 2015-12-07 20:30
 
-	<p>追求永无止境的效率！</p>
-	</li>
-</ol>
-</div>
-
-
-<div class="clear"></div>
+				<div class="clear"></div>
 				<br />
 				<hr align="center" />
              <?php include 'Tempalate/Footer.html';?>
