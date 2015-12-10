@@ -58,7 +58,7 @@
 						<li class="j_comment"><span class="j_comname"><a
 								style="color: blue;">ExplorePress</a>
 								&nbsp;|&nbsp;&nbsp;2015-12-07 20:30</span>
-							<p >追求永无止境的效率！</p></li>
+							<p >追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！</p></li>
 							
 						<li class="j_comment"><span class="j_comname"><a
 								style="color: blue;">ExplorePress</a>
@@ -66,10 +66,27 @@
 							<p >追求永无止境的效率！</p></li>
 					</ol>
 					
+					
 					<div class="c_input">
-					Name:<input type="text" name="ComName" id="ComName"/></br>
-					Email:<input type="text" name="ComEmail" id="ComEmail"/></br>
-					Comment:<textarea name="BComment" id="BComment"></textarea>
+					
+					<p class="comment-form-comment">
+						<label for="author" style="float: left;">Name: </label><br />
+						<input id="ComName" name="ComName" type="text" class="reinput" value="" aria-required="true"/>
+					
+					</p>
+					<p class="comment-form-comment">
+						<label for="author" style="float: left;">Email: </label><br />
+						<input id="ComEmail" name="ComEmail" type="text" class="reinput" value="" aria-required="true"/>
+					
+					</p>
+					<p class="comment-form-comment">
+						<label for="author" style="float: left;">Comment: </label><br />
+					   <textarea class="retextarea" name="BComment" id="BComment"></textarea><br/>
+					   <input  type="submit" value="提交"/>
+					</p>
+                 <p class="comment-form-comment">
+						
+					</p>
 					</div>
 				</div>
 
