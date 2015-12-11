@@ -41,11 +41,9 @@
 				?>
 				
 				<?php 
-				//评论
-				$BlogId = $_GET["BlogId"];
 				
 				?>            
-				<input type="hidden" id="BlogId" value="<?php echo  $BlogId;?>"/>
+				
 				</div>
 				
             <?php require 'Tempalate/Left.html';?>
@@ -55,15 +53,22 @@
 					<hr align="center" />
 					<ol style="list-style-type: none;">
 
-						<li class="j_comment"><span class="j_comname"><a
-								style="color: blue;">ExplorePress</a>
-								&nbsp;|&nbsp;&nbsp;2015-12-07 20:30</span>
-							<p >追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！追求永无止境的效率！</p></li>
-							
-						<li class="j_comment"><span class="j_comname"><a
-								style="color: blue;">ExplorePress</a>
-								&nbsp;|&nbsp;&nbsp;2015-12-07 20:30</span>
-							<p >追求永无止境的效率！</p></li>
+							<?php 
+							//评论
+				             require 'Helper/Dbconnection.php';
+				             $BlogId = $_GET["BlogId"];
+			                 echo "<input type=\"hidden\" id=\"BlogId\" value=".$BlogId."/>";
+				             $sql = "Select * from Comment where BlogId = ".$BlogId." order by ComTime desc";
+			                 $conn->query ( "SET NAMES utf8" );
+				             $result = $conn->query ( $sql );
+							 if ($result->num_rows > 0) {
+					          while ( $row = $result->fetch_assoc () ) {
+					        	echo "<li class=\"j_comment\"><span class=\"j_comname\"><a style=\"color: blue;\">".$row["ComName"]."</a> | ".$row["ComTime"]."</span><p >".$row["Comment"]."</p></li>";
+						
+					            }
+							 }
+							?>
+						
 					</ol>
 					
 					

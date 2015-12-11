@@ -1,4 +1,4 @@
-CREATE TABLE Commet(
+CREATE TABLE Comment(
  Identifier INT AUTO_INCREMENT NOT NULL primary key,
  BlogID INT not NULL,
  ComTime datetime not null,
