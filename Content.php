@@ -57,7 +57,7 @@
 							//评论
 				             require 'Helper/Dbconnection.php';
 				             $BlogId = $_GET["BlogId"];
-			                 echo "<input type=\"hidden\" id=\"BlogId\" value=".$BlogId."/>";
+			                 echo "<input type=\"hidden\" id=\"BlogId\" value=".$BlogId.">";
 				             $sql = "Select * from Comment where BlogId = ".$BlogId." order by ComTime desc";
 			                 $conn->query ( "SET NAMES utf8" );
 				             $result = $conn->query ( $sql );

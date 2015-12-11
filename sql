@@ -4,5 +4,5 @@ CREATE TABLE Comment(
  ComTime datetime not null,
  ComName nvarchar(50) not null,
  Email nvarchar(200) not null,
- Commet text
+ Comment text
 )ENGINE=InnoDB DEFAULT CHARSET=utf8
