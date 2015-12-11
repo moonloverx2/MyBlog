@@ -43,14 +43,14 @@
 				<?php 
 				//评论
 				$BlogId = $_GET["BlogId"];
-				echo  $BlogId;
-				?>            
 				
+				?>            
+				<input type="hidden" id="BlogId" value="<?php echo  $BlogId;?>"/>
 				</div>
 				
             <?php require 'Tempalate/Left.html';?>
 
-<div class="j_commentlist">
+            <div class="j_commentlist">
 					<span style="font-size: 20px; color: blue">Comments:</span>
 					<hr align="center" />
 					<ol style="list-style-type: none;">
@@ -76,17 +76,15 @@
 					</p>
 					<p class="comment-form-comment">
 						<label for="author" style="float: left;">Email: </label><br />
-						<input id="ComEmail" name="ComEmail" type="text" class="reinput" value="" aria-required="true"/>
+						<input id="Email" name="Email" type="text" class="reinput" value="" aria-required="true"/>
 					
 					</p>
-					<p class="comment-form-comment">
+					<p class="comment-form-area">
 						<label for="author" style="float: left;">Comment: </label><br />
-					   <textarea class="retextarea" name="BComment" id="BComment"></textarea><br/>
-					   <input  type="submit" value="提交"/>
+					   <textarea class="retextarea" name="Comment" id="Comment"></textarea><br/>&nbsp;<br/>
+					   <input style="float:left;" onclick="savecomment()" type="submit" value="提交"/>
 					</p>
-                 <p class="comment-form-comment">
-						
-					</p>
+                    
 					</div>
 				</div>
 
@@ -99,4 +97,39 @@
 		</div>
 	</div>
 </body>
+
+	<script type="text/javascript">
+
+	 function savecomment1()
+	    {
+		    alert('sss');
+		    }
+    function savecomment()
+    {
+        $.ajax({
+             type:"POST",
+             url:"/Comment.inc.php",
+             data:{
+            "BlogId":$("#BlogId").val(),
+            "ComName":$("#ComName").val(),
+            "Email":$("#Email").val(),
+            "Comment":$("#Comment").val()
+            },
+            dataType:"JSON",
+            success:function(data)
+            {
+                if(data)
+                {
+                    alert("保存成功！");
+                    window.location.reload();
+                    }
+                else
+                {
+                    alert("保存失败！");
+                    }
+                }
+            });
+        }
+	
+    </script>
 </html>
