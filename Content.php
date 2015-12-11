@@ -111,6 +111,18 @@
 		    }
     function savecomment()
     {
+    	if($("#ComName").val()=="")
+        {
+            alert("Please enter a name!");
+            $("#ComName").focus();
+            return false;
+            }
+    	if($("#Comment").val()=="")
+        {
+            alert("Please enter a comment!");
+            $("#Comment").focus();
+            return false;
+            }
         $.ajax({
              type:"POST",
              url:"/Comment.inc.php",
