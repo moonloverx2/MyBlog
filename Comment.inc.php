@@ -6,6 +6,7 @@ $Email=$_POST["Email"];
 $Comment=$_POST["Comment"];
 $time = date('Y-m-d H:i:s');
 $sql = "insert into Commet(BlogId,ComTime,ComName,Email,Commet) values('".$BlogId."','".$time."','".$ComName."','".$Email."','".$Comment."')";
+$conn->query ( "SET NAMES utf8" );
 echo $conn->query($sql);
 
 ?>
