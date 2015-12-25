@@ -90,7 +90,7 @@
 								$showtype = "Novel";
 								break;
 						}
-						echo "<div class=\"c_title\"><a href=\"/" . $showtype . "/" . date ( 'YmdHis', strtotime ( $row ["UpdateTime"] ) ).$row["Identifier"]. ".html\">" . $row ["Title"] . "</a></div><div style=\"text-indent:3em;\" id=\"b_content\">" .wpgo_substrUtf8($row ["Content"],900 ) . "</div>";
+						echo "<div class=\"c_title\"><a href=\"/" . $showtype . "/" . date ( 'YmdHis', strtotime ( $row ["UpdateTime"] ) ).$row["Identifier"]. ".html\">" . $row ["Title"] . "</a></div><div style=\"text-indent:3em;\" id=\"b_content\">" .htmlSubStr($row ["Content"],900 ) . "</div>";
 						echo "<div class=\"c_footer\"><span>Filed in <a href=\"/" . $showtype . "\">" . $showtype . "</a> &nbsp;&nbsp;Time " .date('Y-m-d',strtotime($row["UpdateTime"])) . "</span><hr align=\"center\" style=\"color: white;\" /></div>";
 					}
 				} else {
