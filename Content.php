@@ -2,7 +2,7 @@
 <html xmlns:wb="http://open.weibo.com/wb">
 <head>
 <meta charset="UTF-8">
-	<title>首页_LuckyXue</title>
+	<title>LuckyXue</title>
 	<meta name="keywords" content="">
 		<link rel="shortcut icon" type="image/x-icon" href="/Images/ico.png" />
 		<link href="/Css/style.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,9 @@
 	   document.title = $('.c_title a').text()+"_LuckyXue";
 	})
 </script>
-
+<div id="wx_pic" style="margin:0 auto;display:none;">
+<img src="/Images/pic300.jpg" />
+</div>
 </head>
 <body>
 
@@ -105,10 +107,6 @@
 
 	<script type="text/javascript">
 
-	 function savecomment1()
-	    {
-		    alert('sss');
-		    }
     function savecomment()
     {
     	if($("#ComName").val()=="")
